@@ -20,6 +20,12 @@ spring:
           max-idle-time: 15s
           max-life-time: 60s
       default-filters:
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter:
+              replenishRate: 10
+              burstCapacity: 20
+              requestedToken: 1
         - name: Retry
           args:
             retries: 3
@@ -53,7 +59,7 @@ spring:
     connect-timeout: 2s
     host: 6379
     timeout: 1s
-    
+
 resilience4j:
   circuitbreaker:
     configs:
