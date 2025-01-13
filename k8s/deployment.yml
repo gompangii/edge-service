@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: edge-service
-          image: edge-service
+          image: docker.io/gompangii/edge-service
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:
