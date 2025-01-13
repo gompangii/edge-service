@@ -58,7 +58,7 @@ spring:
                 name: orderCircuitBreaker
   redis:
     connect-timeout: 2s
-    host: localhost
+    host: 10.101.23.68
     port: 6379
     timeout: 1s
 
