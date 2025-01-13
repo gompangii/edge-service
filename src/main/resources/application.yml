@@ -59,7 +59,7 @@ spring:
   data:
     redis:
       connect-timeout: 2s
-      host: 10.101.23.68
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
       port: 6379
       timeout: 1s
 
