@@ -1,3 +1,5 @@
+# 9.3.2 스프링과 레디스의 통합
+## 레디스 설정 시 Spring Boot 3.2 버전 이상에서는 기존의 spring:redis:host 를 spring:data:redis:host 로 설정 해야 함
 
 # 9.3.3 요청 사용률 젱한 설정 - curl 테스트 방법
  > curl -i -X POST http://localhost:9000/books
