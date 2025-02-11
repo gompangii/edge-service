@@ -8,3 +8,5 @@
 # edge-service k8s 배포
 ## image build 및 docker hub에 이미지 배포
  >  ./gradlew bootBuildImage --imageName docker.io/gompangii/edge-service --publishImage -PregistryUrl=docker.io -PregistryUsername=gompangii -PregistryToken=<token>
+
+
