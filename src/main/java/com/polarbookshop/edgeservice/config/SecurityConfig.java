@@ -1,6 +1,7 @@
 package com.polarbookshop.edgeservice.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
@@ -16,6 +17,7 @@ import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.web.server.WebFilter;
 import reactor.core.publisher.Mono;
 
+@Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
@@ -23,7 +25,8 @@ public class SecurityConfig {
   SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ReactiveClientRegistrationRepository clientRegistrationRepository) {
     return http
       .authorizeExchange(exchange -> exchange
-        .pathMatchers(HttpMethod.GET, "/", "/*.css", "/*.js", "/favicon.ico").permitAll()
+        //.pathMatchers(HttpMethod.GET, "/", "/*.css", "/*.js", "/favicon.ico").permitAll()
+        .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
         .pathMatchers(HttpMethod.GET, "/books/**").permitAll()
         .anyExchange().authenticated()
       )
@@ -31,8 +34,8 @@ public class SecurityConfig {
         .authenticationEntryPoint(new HttpStatusServerEntryPoint(HttpStatus.UNAUTHORIZED)))
       .oauth2Login(Customizer.withDefaults())
       .logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler(clientRegistrationRepository)))
-      //.csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
-      .csrf(ServerHttpSecurity.CsrfSpec::disable)
+      .csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
+      //.csrf(ServerHttpSecurity.CsrfSpec::disable)
       .build();
   }
 
