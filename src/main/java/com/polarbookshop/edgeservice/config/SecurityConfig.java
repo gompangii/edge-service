@@ -42,7 +42,7 @@ public class SecurityConfig {
   private ServerLogoutSuccessHandler oidcLogoutSuccessHandler(
     ReactiveClientRegistrationRepository clientRegistrationRepository) {
     var oidcLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(clientRegistrationRepository);
-    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://http://192.168.56.40:9000");
+    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://192.168.56.40:9000");
     return oidcLogoutSuccessHandler;
   }
 

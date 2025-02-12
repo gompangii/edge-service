@@ -9,4 +9,6 @@
 ## image build 및 docker hub에 이미지 배포
  >  ./gradlew bootBuildImage --imageName docker.io/gompangii/edge-service --publishImage -PregistryUrl=docker.io -PregistryUsername=gompangii -PregistryToken=<token>
 
-
+# 11.5.2 인증흐름 제어
+## SecurityConfig 클래스에 @Configuration 어노테이션을 달아야 정상 동작
+## logout시 오류는 원인을 못 찾음
