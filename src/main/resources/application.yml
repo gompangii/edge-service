@@ -60,7 +60,7 @@ spring:
             - name: CircuitBreaker
               args:
                 name: orderCircuitBreaker
-                
+
   data:
     redis:
       connect-timeout: 2s
