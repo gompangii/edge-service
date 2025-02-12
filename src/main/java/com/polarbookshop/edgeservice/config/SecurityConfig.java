@@ -46,12 +46,10 @@ public class SecurityConfig {
   WebFilter csrfWebFilter() {
 
     return (exchange, chain) -> {
-      exchange.getResponse().beforeCommit(() -> {
-        return Mono.defer(() -> {
-          Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
-          return csrfToken != null ? csrfToken.then() : Mono.empty();
-        });
-      });
+      exchange.getResponse().beforeCommit(() -> Mono.defer(() -> {
+        Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
+        return csrfToken != null ? csrfToken.then() : Mono.empty();
+      }));
       return chain.filter(exchange);
     };
   }
