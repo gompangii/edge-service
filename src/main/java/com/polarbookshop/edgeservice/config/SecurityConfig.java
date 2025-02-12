@@ -20,9 +20,7 @@ import reactor.core.publisher.Mono;
 public class SecurityConfig {
 
   @Bean
-  SecurityWebFilterChain springSecurityFilterChain(
-    ServerHttpSecurity http,
-    ReactiveClientRegistrationRepository clientRegistrationRepository) {
+  SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ReactiveClientRegistrationRepository clientRegistrationRepository) {
     return http
       .authorizeExchange(exchange -> exchange
         .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
@@ -46,12 +44,14 @@ public class SecurityConfig {
 
   @Bean
   WebFilter csrfWebFilter() {
-    // Required because of https://github.com/spring-projects/spring-security/issues/5766
+
     return (exchange, chain) -> {
-      exchange.getResponse().beforeCommit(() -> Mono.defer(() -> {
-        Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
-        return csrfToken != null ? csrfToken.then() : Mono.empty();
-      }));
+      exchange.getResponse().beforeCommit(() -> {
+        return Mono.defer(() -> {
+          Mono<CsrfToken> csrfToken = exchange.getAttribute(CsrfToken.class.getName());
+          return csrfToken != null ? csrfToken.then() : Mono.empty();
+        });
+      });
       return chain.filter(exchange);
     };
   }
