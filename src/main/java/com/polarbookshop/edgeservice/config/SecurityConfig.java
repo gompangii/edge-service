@@ -14,16 +14,18 @@ import org.springframework.security.web.server.authentication.HttpStatusServerEn
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 import org.springframework.security.web.server.csrf.CsrfToken;
+import org.springframework.security.web.server.csrf.XorServerCsrfTokenRequestAttributeHandler;
 import org.springframework.web.server.WebFilter;
 import reactor.core.publisher.Mono;
 
-@Configuration
-@EnableWebFluxSecurity
+//@Configuration
+//@EnableWebFluxSecurity
+@Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
 
   @Bean
   SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ReactiveClientRegistrationRepository clientRegistrationRepository) {
-    return http
+    /*return http
       .authorizeExchange(exchange -> exchange
         //.pathMatchers(HttpMethod.GET, "/", "/*.css", "/*.js", "/favicon.ico").permitAll()
         .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
@@ -37,13 +39,28 @@ public class SecurityConfig {
       //.csrf().disable()
       .csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
       .csrf(ServerHttpSecurity.CsrfSpec::disable)
+      .build();*/
+    return http
+      .authorizeExchange(exchange -> exchange
+        .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
+        .pathMatchers(HttpMethod.GET, "/books/**").permitAll()
+        .anyExchange().authenticated()
+      )
+      .exceptionHandling(exceptionHandling -> exceptionHandling
+        .authenticationEntryPoint(new HttpStatusServerEntryPoint(HttpStatus.UNAUTHORIZED)))
+      .oauth2Login(Customizer.withDefaults())
+      .logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler(clientRegistrationRepository)))
+      .csrf(csrf -> csrf
+        .csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse())
+        .csrfTokenRequestHandler(new XorServerCsrfTokenRequestAttributeHandler()::handle))
       .build();
   }
 
   private ServerLogoutSuccessHandler oidcLogoutSuccessHandler(
     ReactiveClientRegistrationRepository clientRegistrationRepository) {
     var oidcLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(clientRegistrationRepository);
-    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://192.168.56.40:9000");
+    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://192.168.56.40:9000");
+    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
     return oidcLogoutSuccessHandler;
   }
 
