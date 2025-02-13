@@ -11,4 +11,4 @@
 
 # 11.5.2 인증흐름 제어
 ## SecurityConfig 클래스에 @Configuration 어노테이션을 달아야 정상 동작
-## logout시 오류는 원인을 못 찾음
+## logout시 오류는 .csrf(ServerHttpSecurity.CsrfSpec::disable) 추가 하면 일단 해결됨(????)
