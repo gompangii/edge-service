@@ -25,7 +25,8 @@ public class SecurityConfig {
 
   @Bean
   SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http, ReactiveClientRegistrationRepository clientRegistrationRepository) {
-    /*return http
+    /*  책 예제
+    return http
       .authorizeExchange(exchange -> exchange
         //.pathMatchers(HttpMethod.GET, "/", "/*.css", "/*.js", "/favicon.ico").permitAll()
         .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
@@ -39,7 +40,9 @@ public class SecurityConfig {
       //.csrf().disable()
       .csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
       .csrf(ServerHttpSecurity.CsrfSpec::disable)
-      .build();*/
+      .build();
+     */
+    // 샘플소스 Github sb-3-main 소스 (스프링 부트 3.x)
     return http
       .authorizeExchange(exchange -> exchange
         .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()

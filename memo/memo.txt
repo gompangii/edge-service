@@ -11,4 +11,5 @@
 
 # 11.5.2 인증흐름 제어
 ## SecurityConfig 클래스에 @Configuration 어노테이션을 달아야 정상 동작
-## logout시 오류는 .csrf(ServerHttpSecurity.CsrfSpec::disable) 추가 하면 일단 해결됨(????)
+## logout시 오류는 .csrf(ServerHttpSecurity.CsrfSpec::disable) 추가 하면 일단 해결됨
+   -> 샘플소스 Github sb-3-main 소스 (스프링 부트 3.x)로 테스트 하면 정상 동작
