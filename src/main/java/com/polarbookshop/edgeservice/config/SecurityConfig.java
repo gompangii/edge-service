@@ -54,6 +54,7 @@ public class SecurityConfig {
       .authorizeExchange(exchange -> exchange
         .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
         .pathMatchers(HttpMethod.GET, "/books/**").permitAll()
+        .pathMatchers(HttpMethod.PUT, "/books/**").permitAll()
         //.pathMatchers("/books/**").permitAll()
         .anyExchange().authenticated()
       )
