@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.test.web.reactive.server.SecurityMockServerConfigurers;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
@@ -20,7 +21,7 @@ public class SecurityCongigTests {
   @Autowired
   WebTestClient webClient;
 
-  @MockBean
+  @MockitoBean
   ReactiveClientRegistrationRepository clientRegistrationRepository;
 
   @Test
