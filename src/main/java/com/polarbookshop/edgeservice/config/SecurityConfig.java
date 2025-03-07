@@ -52,9 +52,10 @@ public class SecurityConfig {
     // 샘플소스 Github sb-3-main 소스 (스프링 부트 3.x)
     return http
       .authorizeExchange(exchange -> exchange
+        .pathMatchers("/actuator/**").permitAll()
         .pathMatchers("/", "/*.css", "/*.js", "/favicon.ico").permitAll()
         .pathMatchers(HttpMethod.GET, "/books/**").permitAll()
-        .pathMatchers(HttpMethod.PUT, "/books/**").permitAll()
+        //.pathMatchers(HttpMethod.PUT, "/books/**").permitAll()
         //.pathMatchers("/books/**").permitAll()
         .anyExchange().authenticated()
       )
