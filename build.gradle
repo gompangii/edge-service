@@ -52,18 +52,23 @@ dependencyManagement {
 	}
 }
 
+springBoot {
+	buildInfo()
+}
+
 bootBuildImage {
 	imageName = "${project.name}"
-	publish = true
+	//publish = true
 	environment = ["BP_JVM_VERSION": "17"]
+	createdDate = "now"
 
-	docker {
-		publishRegistry {
-			username = project.findProperty("registryUsername")
-			password = project.findProperty("registryToken")
-			url = project.findProperty("registryUrl")
-		}
-	}
+//	docker {
+//		publishRegistry {
+//			username = project.findProperty("registryUsername")
+//			password = project.findProperty("registryToken")
+//			url = project.findProperty("registryUrl")
+//		}
+//	}
 }
 
 tasks.named('test') {
