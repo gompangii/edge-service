@@ -60,6 +60,7 @@ bootBuildImage {
 	imageName = "${project.name}"
 	//publish = true
 	environment = ["BP_JVM_VERSION": "17"]
+	environment = ["BPE_JAVA_OPTS": "-Xms512m -Xmx1024m"]
 	createdDate = "now"
 
 //	docker {
