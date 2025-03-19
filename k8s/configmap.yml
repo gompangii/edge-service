@@ -15,4 +15,4 @@ data:
           client:
             provider:
               keycloak:
-                issuer-uri: http://polar-keycloak/realms/PolarBookshop
+                issuer-uri: http://192.168.56.30:8080/realms/PolarBookshop
