@@ -5,10 +5,11 @@ metadata:
   labels:
     app: edge-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: edge-service
   ports:
     - protocol: TCP
       port: 80
       targetPort: 9000
+      nodePort: 30900
