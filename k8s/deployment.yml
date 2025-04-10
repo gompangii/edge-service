@@ -30,7 +30,7 @@ spec:
             - containerPort: 9000
           env:
             - name: JAVA_OPTS
-              value: "-Xms512m -Xmx512m"
+              value: "-Xms256m -Xmx256m"
             - name: CATALOG_SERVICE_URL
               value: http://catalog-service
             - name: ORDER_SERVICE_URL
