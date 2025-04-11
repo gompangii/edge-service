@@ -17,12 +17,14 @@ import org.springframework.security.web.server.authentication.logout.ServerLogou
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.security.web.server.csrf.XorServerCsrfTokenRequestAttributeHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.WebFilter;
 import reactor.core.publisher.Mono;
 
 //@Configuration
 //@EnableWebFluxSecurity
 @Configuration(proxyBeanMethods = false)
+@Component
 public class SecurityConfig {
 
   private final PolarProperties polarProperties;
@@ -79,8 +81,8 @@ public class SecurityConfig {
     ReactiveClientRegistrationRepository clientRegistrationRepository) {
     var oidcLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(clientRegistrationRepository);
     //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://192.168.56.40:9000");
-    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://polarbookshop.example.com:32272");
-    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri(polarProperties.getLogoutRedirectUri());
+    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://polarbookshop.example.com:32272");
+    oidcLogoutSuccessHandler.setPostLogoutRedirectUri(polarProperties.getLogoutRedirectUri());
     return oidcLogoutSuccessHandler;
   }
 
