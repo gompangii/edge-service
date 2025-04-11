@@ -27,11 +27,11 @@ import reactor.core.publisher.Mono;
 @Component
 public class SecurityConfig {
 
-  private final PolarProperties polarProperties;
-
-  public SecurityConfig(PolarProperties polarProperties) {
-    this.polarProperties = polarProperties;
-  }
+//  private final PolarProperties polarProperties;
+//
+//  public SecurityConfig(PolarProperties polarProperties) {
+//    this.polarProperties = polarProperties;
+//  }
 
   @Bean
   ServerOAuth2AuthorizedClientRepository authorizedClientRepository() {
@@ -81,8 +81,8 @@ public class SecurityConfig {
     ReactiveClientRegistrationRepository clientRegistrationRepository) {
     var oidcLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(clientRegistrationRepository);
     //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://192.168.56.40:9000");
-    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://polarbookshop.example.com:32272");
-    oidcLogoutSuccessHandler.setPostLogoutRedirectUri(polarProperties.getLogoutRedirectUri());
+    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://polarbookshop.example.com:32272");
+    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri(polarProperties.getLogoutRedirectUri());
     return oidcLogoutSuccessHandler;
   }
 
