@@ -79,8 +79,8 @@ public class SecurityConfig {
     ReactiveClientRegistrationRepository clientRegistrationRepository) {
     var oidcLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(clientRegistrationRepository);
     //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://192.168.56.40:9000");
-    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://polarbookshop.example.com:32272");
-    oidcLogoutSuccessHandler.setPostLogoutRedirectUri(polarProperties.getLogoutRedirectUri());
+    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://polarbookshop.example.com:32272");
+    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri(polarProperties.getLogoutRedirectUri());
     return oidcLogoutSuccessHandler;
   }
 

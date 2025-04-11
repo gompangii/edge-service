@@ -10,7 +10,7 @@ public class PolarProperties {
     return logoutRedirectUri;
   }
 
-  public void setLogoutRedirectUri(String greeting) {
-    this.logoutRedirectUri = greeting;
+  public void setLogoutRedirectUri(String logoutRedirectUri) {
+    this.logoutRedirectUri = logoutRedirectUri;
   }
 }
