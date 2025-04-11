@@ -7,7 +7,7 @@ spring:
       client:
         registration:
           keycloak:
-            redirect-uri: http://polarbookshop.example.com:30900/login/oauth2/code/edge-service
+            redirect-uri: http://polarbookshop.example.com:32272/login/oauth2/code/edge-service
         provider:
           keycloak:
             issuer-uri: http://192.168.56.30:30880/realms/PolarBookshop
