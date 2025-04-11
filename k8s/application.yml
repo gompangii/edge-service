@@ -1,3 +1,5 @@
+polar:
+  logoutRedirectUri: http://polarbookshop.example.com:32272
 spring:
   data:
     redis:

@@ -25,6 +25,12 @@ import reactor.core.publisher.Mono;
 @Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
 
+  private final PolarProperties polarProperties;
+
+  public SecurityConfig(PolarProperties polarProperties) {
+    this.polarProperties = polarProperties;
+  }
+
   @Bean
   ServerOAuth2AuthorizedClientRepository authorizedClientRepository() {
     return new WebSessionServerOAuth2AuthorizedClientRepository();
@@ -73,7 +79,8 @@ public class SecurityConfig {
     ReactiveClientRegistrationRepository clientRegistrationRepository) {
     var oidcLogoutSuccessHandler = new OidcClientInitiatedServerLogoutSuccessHandler(clientRegistrationRepository);
     //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://192.168.56.40:9000");
-    oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
+    //oidcLogoutSuccessHandler.setPostLogoutRedirectUri("http://polarbookshop.example.com:32272");
+    oidcLogoutSuccessHandler.setPostLogoutRedirectUri(polarProperties.getLogoutRedirectUri());
     return oidcLogoutSuccessHandler;
   }
 
