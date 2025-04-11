@@ -24,7 +24,6 @@ import reactor.core.publisher.Mono;
 //@Configuration
 //@EnableWebFluxSecurity
 @Configuration(proxyBeanMethods = false)
-@Component
 public class SecurityConfig {
 
 //  private final PolarProperties polarProperties;
